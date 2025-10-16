@@ -24,6 +24,8 @@ public class CTPLHomePage {
     public void navigateToCTPLPage() {
         driver.get(CTPL_URL);
         // wait for page main component or plan cards to load
+        WebElement ele =wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[text()='Accept All Cookies']")));
+        ele.click();
         wait.until(ExpectedConditions.or(
             ExpectedConditions.presenceOfElementLocated(By.cssSelector("fwd-plan-card")),
             ExpectedConditions.presenceOfElementLocated(By.cssSelector("fwd-plan-table"))
