@@ -52,7 +52,7 @@ public class CTPLSteps {
         checkoutPage = planPage.proceedToCheckout();
     }
 
-    @Then("current URL should contain \"/checkout/payment\"")
+    @Then("current URL should contain {string}")
     public void urlShouldContainCheckout() {
         Assert.assertTrue(driver.getCurrentUrl().contains("/checkout/payment"),
                 "URL does not contain /checkout/payment. Current: " + driver.getCurrentUrl());
@@ -62,6 +62,15 @@ public class CTPLSteps {
     @When("I select the plan {string}")
     public void selectPlanByName(String planName) {
         planPage = homePage.selectPlanByName(planName);
+    }
+    @Then("checkout URL should contain {string}")
+    public void checkout_url_should_contain(String expectedPart) {
+        String currentUrl = Hooks.driver.getCurrentUrl();
+        System.out.println("Current URL: " + currentUrl);
+        if (!currentUrl.contains(expectedPart)) {
+            throw new AssertionError("Expected URL to contain '" + expectedPart + "' but got: " + currentUrl);
+        }
+        System.out.println("Checkout URL verified successfully!");
     }
 
     // Requirement 4 - summary validations and date changes
